@@ -5,23 +5,20 @@ import { useState, useEffect } from "react";
 
 function App() {
   
-  const [latitude, setLatitude] = useState(0);
-  const [longitude, setLongitude] = useState(0);
   const [data, setData] = useState({});
   const [temp, setTemp] = useState(0);
   const [isF, setIsF] = useState(true);
 
   const success = pos =>{
     console.log(pos.coords)
-    setLatitude(pos.coords.latitude);
-    setLongitude(pos.coords.longitude);
+    const latitude = pos.coords.latitude;
+    const longitude = pos.coords.longitude;
     console.log(latitude + "sdjnskjd");
     console.log(longitude);
     axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=c69f80b60b9acd96b7f5c7cc46c5dda8`).then((res) => 
     {
       setData(res.data);
       setTemp(res.data.main.temp);
-      console.log(res.data);
 
     
     });
@@ -36,7 +33,7 @@ function App() {
 
   
 
- //console.log("OBJETO:" + res.data);
+ console.log(data);
   
   const convertTemp = () => {
     if (isF) {
